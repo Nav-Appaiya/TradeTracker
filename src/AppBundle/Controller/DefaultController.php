@@ -19,11 +19,11 @@ class DefaultController extends Controller {
 		//	$sites = $tradeClient->fetchSitesAndSave();
 		//	print_r($sites);exit;
 
-		$campains = $tradeClient->fetchCampaignsAndSave();
+		//	Opslaan campaigns - ok
+		//	$campaigns = $tradeClient->fetchCampaignsAndSave();
+		//	print_r($campaigns);
 
-		foreach ($campains as $campain) {
-			print_r($campain);exit;
-		}
+
 		exit;
 	}
 	

@@ -107,7 +107,6 @@ class TradeTrackerClient
             $newCamp->setName($camp->name);
             $em->persist($newCamp);
             $em->flush();
-
         }
     }
 
