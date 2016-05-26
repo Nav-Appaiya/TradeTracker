@@ -83,8 +83,7 @@ class TradeTrackerClient
     }
 
     // Testing with naviation.me site at 248946
-    public function getSiteId()
-    {
+    public function getSiteId() {
         return '248946';
     }
 
