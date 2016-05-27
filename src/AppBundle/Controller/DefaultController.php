@@ -2,10 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends Controller {
 	/**
@@ -16,16 +14,21 @@ class DefaultController extends Controller {
 		$tradeClient = $this->get('tradetracker');
 
 		//	Opslaan sites - ok
-		//	$sites = $tradeClient->fetchSitesAndSave();
-		//	print_r($sites);exit;
+		// $sites = $tradeClient->fetchSitesAndSave();
+		// print_r($sites);
 
 		//	Opslaan campaigns - ok
-		//	$campaigns = $tradeClient->fetchCampaignsAndSave();
-		//	print_r($campaigns);
+		// $campaigns = $tradeClient->fetchCampaignsAndSave();
+		// print_r($campaigns);
 
+		// Opslaan promotiemateriaal - todo
+		$functions   = $tradeClient->getFunctions();
+		$types       = $tradeClient->getTypes();
+		$campaignCat = $tradeClient->getCampaignCategories();
+
+		print_r($functions);
 
 		exit;
 	}
-	
-	
+
 }
