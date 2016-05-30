@@ -10,6 +10,7 @@ namespace AppBundle\Client;
 
 
 use AppBundle\Entity\Campaign;
+use AppBundle\Entity\Product;
 use AppBundle\Entity\Site;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\DependencyInjection\Container;
@@ -85,6 +86,33 @@ class TradeTrackerClient
         }
 
         return $sites;
+    }
+
+    public function fetchProductsAndSave($options = ['limit' => 100])
+    {
+        $em = $this->container->get('doctrine.orm.entity_manager');
+        $productRepo = $em->getRepository('AppBundle:Product');
+        $productsFeed = $this->client->getFeedProducts($this->getSiteId(), $options);
+        $products = [];
+
+        foreach ($productsFeed as $item) {
+            $newProduct = $productRepo->findOneByIdentifier($item->identifier);
+            if(!$newProduct){
+                $newProduct = new Product();
+                $newProduct->setIdentifier($item->identifier);
+            }
+            $newProduct->setName($item->name);
+            $newProduct->setProductCategoryName(isset($item->productCategoryName) ? $item->productCategoryName : "None");
+            $newProduct->setDescription($item->description);
+            $newProduct->setImageUrl($item->imageURL);
+            $newProduct->setProductUrl($item->productURL);
+            $newProduct->setAdditional($item->additional);
+            $newProduct->setPrice(isset($item->price) ? $item->price : '0.00');
+
+            $em->persist($newProduct);
+            $em->flush();
+        }
+
     }
 
     // Testing with naviation.me site at 248946
@@ -172,6 +200,11 @@ class TradeTrackerClient
     public function getTestingStuff()
     {
         return $this->client->__getFunctions();
+    }
+
+    public function getProductsFeeds($options = ['limit' => 10])
+    {
+        return $this->client->getFeedProducts($this->getSiteId(), $options);
     }
     
 }

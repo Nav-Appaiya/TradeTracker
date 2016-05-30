@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends Controller {
 	/**
@@ -21,12 +22,17 @@ class DefaultController extends Controller {
 		// $campaigns = $tradeClient->fetchCampaignsAndSave();
 		// print_r($campaigns);
 
+		//	Opslaan Products - ok
+		// $campaigns = $tradeClient->fetchProductsAndSave();
+		// print_r($campaigns);
+
 		// Opslaan promotiemateriaal - todo
 		$functions   = $tradeClient->getFunctions();
 		$types       = $tradeClient->getTypes();
 		$campaignCat = $tradeClient->getCampaignCategories();
+		$client      = $tradeClient->getClient();
 
-		print_r($functions);
+		print_r($tradeClient->fetchProductsAndSave());
 
 		exit;
 	}
