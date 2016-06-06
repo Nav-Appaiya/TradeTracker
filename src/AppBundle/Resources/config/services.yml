@@ -1,9 +1,15 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
-    tradetracker.klantid: 137293
-    tradetracker.sleutel: 01856d1ef05f685bfe2a82c3412aa27212d6e8cf
+    # SIB affiliate account
+    tradetracker.klantid: 20187
+    tradetracker.sleutel: b76e082f45903e612ee189bfd1c97fb3db8e287f
     tradetracker.locale: nl_NL
+
+    # Naviation.me affiliate account
+    tradetracker.test.klantid: 137293
+    tradetracker.test.sleutel: 01856d1ef05f685bfe2a82c3412aa27212d6e8cf
+    tradetracker.test.locale: nl_NL
 
 services:
     tradetracker:

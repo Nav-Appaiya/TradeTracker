@@ -34,7 +34,7 @@ class TradeTrackerClient
     /**
      * Hardcoded siteid for now
      */
-    public $siteId = '248946';
+    public $affilateSiteId;
 
 
     /**
@@ -46,6 +46,7 @@ class TradeTrackerClient
      */
     public function __construct($klantid = '', $sleutel = '', ContainerInterface $container)
     {
+        set_time_limit(0);
         $this->client = new \SoapClient(
             'http://ws.tradetracker.com/soap/affiliate?wsdl', array(
                 'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP
@@ -88,8 +89,9 @@ class TradeTrackerClient
         return $sites;
     }
 
-    public function fetchProductsAndSave($options = ['limit' => 100])
+    public function fetchProductsAndSave($options = ['limit' => 100000])
     {
+        set_time_limit(10);
         $em = $this->container->get('doctrine.orm.entity_manager');
         $productRepo = $em->getRepository('AppBundle:Product');
         $productsFeed = $this->client->getFeedProducts($this->getSiteId(), $options);
@@ -100,6 +102,7 @@ class TradeTrackerClient
             if(!$newProduct){
                 $newProduct = new Product();
                 $newProduct->setIdentifier($item->identifier);
+                echo $newProduct->getName();
             }
             $newProduct->setName($item->name);
             $newProduct->setProductCategoryName(isset($item->productCategoryName) ? $item->productCategoryName : "None");
@@ -120,7 +123,10 @@ class TradeTrackerClient
      * @return string
      */
     public function getSiteId() {
-        return '248946';
+        $affilateSites = $this->client->getAffiliateSites()[0];
+        $this->affilateSiteId = $affilateSites->ID;
+
+        return $this->affilateSiteId;
     }
 
     /**

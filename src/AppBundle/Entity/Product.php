@@ -52,7 +52,7 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="price", type="decimal")
+     * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
      */
     private $price;
 
@@ -66,7 +66,7 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="imageUrl", type="text")
+     * @ORM\Column(name="imageUrl", type="text", nullable=true)
      */
     private $imageUrl;
 

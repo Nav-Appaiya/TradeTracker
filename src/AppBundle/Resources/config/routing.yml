@@ -1,0 +1,4 @@
+# Cron paths
+tradetracker:
+    path: /cron
+    defaults: { _controller: AppBundle:Cron:index }
