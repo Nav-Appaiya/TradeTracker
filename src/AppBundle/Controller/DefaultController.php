@@ -12,8 +12,10 @@ class DefaultController extends Controller {
 	 */
 	public function indexAction(Request $request) {
 		header('Content-Type: application/json');
-		$tradeClient = $this->get('tradetracker');
 
+		$tradeClient = $this->get('tradetracker');
+		$klantId = $this->getParameter('tradetracker.klantid');
+var_dump($klantId);exit;
 		//	Opslaan sites - ok
 		// $sites = $tradeClient->fetchSitesAndSave();
 		// print_r($sites);
