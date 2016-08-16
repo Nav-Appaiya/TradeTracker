@@ -7,27 +7,31 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends Controller {
-	/**
+
+    /**
 	 * @Route("/", name="homepage")
 	 */
 	public function indexAction(Request $request) {
 		header('Content-Type: application/json');
+        $tradeClient = $this->get('tradetracker');
 
-		$tradeClient = $this->get('tradetracker');
-		$klantId = $this->getParameter('tradetracker.klantid');
-var_dump($klantId);exit;
 		//	Opslaan sites - ok
 		// $sites = $tradeClient->fetchSitesAndSave();
-		// print_r($sites);
+		// print_r($sites); exit;
 
 		//	Opslaan campaigns - ok
-		// $campaigns = $tradeClient->fetchCampaignsAndSave();
-		// print_r($campaigns);
+        // $campaigns = $tradeClient->fetchCampaignsAndSave(['assignmentStatus' => 'accepted']);
+        // print_r($campaigns); exit;
 
 		//	Opslaan Products - ok
-		// $campaigns = $tradeClient->fetchProductsAndSave();
-		// print_r($campaigns);
+		// $products = $tradeClient->fetchProductsAndSave(['limit' => 150, 'offset'=> 1500]);
+        // print_r($products); exit;
 
+        // Opslaan van Payments - ok
+        $payments = $tradeClient->fetchPaymentsAndSave([]);
+        print_r($payments); exit;
+
+        print_r($client->getPayments());exit;
 		// Opslaan promotiemateriaal - todo
 		$functions   = $tradeClient->getFunctions();
 		$types       = $tradeClient->getTypes();

@@ -10,9 +10,11 @@ namespace AppBundle\Client;
 
 
 use AppBundle\Entity\Campaign;
+use AppBundle\Entity\Payment;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Site;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -52,6 +54,10 @@ class TradeTrackerClient
                 'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP
             )
         );
+
+        if($klantid == 'tradetracker-klantid' || $sleutel == 'tradetracker-sleutel'){
+            return new Exception("KlantID / Sleutel not set properly, please check services.yml under Bundle/Resources/config/.");
+        }
         
         $this->client->authenticate($klantid, $sleutel, false, 'nl_NL', false);
         $this->container = $container;
@@ -91,7 +97,7 @@ class TradeTrackerClient
 
     public function fetchProductsAndSave($options = ['limit' => 100000])
     {
-        set_time_limit(10);
+        // set_time_limit(100);
         $em = $this->container->get('doctrine.orm.entity_manager');
         $productRepo = $em->getRepository('AppBundle:Product');
         $productsFeed = $this->client->getFeedProducts($this->getSiteId(), $options);
@@ -106,16 +112,45 @@ class TradeTrackerClient
             }
             $newProduct->setName($item->name);
             $newProduct->setProductCategoryName(isset($item->productCategoryName) ? $item->productCategoryName : "None");
-            $newProduct->setDescription($item->description);
+            $newProduct->setDescription(isset($item->description) ? : 'No description');
             $newProduct->setImageUrl($item->imageURL);
             $newProduct->setProductUrl($item->productURL);
             $newProduct->setAdditional($item->additional);
             $newProduct->setPrice(isset($item->price) ? $item->price : '0.00');
 
             $em->persist($newProduct);
-            $em->flush();
+        }
+        $em->flush();
+
+    }
+
+    public function fetchPaymentsAndSave()
+    {
+        $em = $this->container->get('doctrine.orm.entity_manager');
+        $paymentsRepo = $em->getRepository('AppBundle:Payment');
+        $payments = $this->client->getPayments();
+
+        foreach($payments as $payment){
+            $paymentEntity = $paymentsRepo->findOneByInvoiceNumber($payment->invoiceNumber);
+
+            if(!$paymentEntity){
+                /**
+                 * @var Payment $paymentEntity
+                 */
+                $paymentEntity = new Payment();
+                $paymentEntity->setInvoiceNumber($payment->invoiceNumber);
+            }
+            $paymentEntity->setCurrency($payment->currency);
+            $paymentEntity->setSubTotal($payment->subTotal);
+            $paymentEntity->setVAT($payment->VAT);
+            $paymentEntity->setEndTotal($payment->endTotal);
+            $paymentEntity->setBillDate(new \DateTime($payment->billDate));
+            $paymentEntity->setPayDate(new \DateTime($payment->payDate));
+            $em->persist($paymentEntity); $em->flush();
         }
 
+        $em->flush();
+        die('dope');
     }
 
     // Testing with naviation.me site at 248946
@@ -154,7 +189,7 @@ class TradeTrackerClient
      */
     public function fetchCampaignsAndSave($options = array())
     {
-        $camps = $this->client->getCampaigns($this->siteId, false);
+        $camps = $this->client->getCampaigns($this->getSiteId(), $options);
         $em = $this->container->get('doctrine')->getManager();
         $campRepo = $em->getRepository('AppBundle:Campaign');
         $campaigns = array();
