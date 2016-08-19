@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class CronController extends Controller
 {
     /**
-     * @Route(path="/cr")
+     * @Route(path="/cron")
      */
     public function indexAction()
     {

@@ -12,6 +12,9 @@ class DefaultController extends Controller {
 	 * @Route("/", name="homepage")
 	 */
 	public function indexAction(Request $request) {
+
+	    return $this->render('@NavTradeTracker/Default/index.html.twig');
+
 		header('Content-Type: application/json');
         $tradeClient = $this->get('tradetracker');
 
