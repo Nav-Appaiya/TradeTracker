@@ -18,12 +18,9 @@
 
     {% for new in news %}
         <div class="row">
-            <h1>
-                {{ new.title }}
-            </h1>
-            <p>
-                {{ new.content|raw }}
-            </p>
+            <h1>{{ new.title }}</h1>
+            <p>{{ new.content|raw }}</p>
+
             <div>
                 <span class="badge">Posted {{ new.publishDate }}</span>
                 <div class="pull-right">
@@ -35,6 +32,10 @@
                     <span class="label label-danger">ID: {{ new.ID }}</span>
                 </div>
             </div>
+        </div>
+        {% else %}
+        <div class="row">
+            <h3 class="text-center">Sorry, no posts where found for given filter, please try something else. </h3>
         </div>
     {% endfor %}
 
