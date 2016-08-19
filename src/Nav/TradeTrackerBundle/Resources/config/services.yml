@@ -1,0 +1,4 @@
+services:
+#    nav_trade_tracker.example:
+#        class: Nav\TradeTrackerBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

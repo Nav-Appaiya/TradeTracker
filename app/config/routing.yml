@@ -1,3 +1,8 @@
+nav_trade_tracker:
+    resource: "@NavTradeTrackerBundle/Controller/"
+    type:     annotation
+    prefix:   /nav
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

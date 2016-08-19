@@ -1,0 +1,17 @@
+parameters:
+  # See webservices in your Tradetracker account for your webservice credentials.
+  # Nav Appaiya 19-08-2016, Rotterdam
+  tradetracker.klantid: tradetracker-klantid
+  tradetracker.sleutel: tradetracker-sleutel
+  tradetracker.locale: nl_NL
+
+  # Naviation.me testing account
+  tradetracker.test.klantid: test-tradetracker-klantid
+  tradetracker.test.sleutel: test-tradetracker-sleutel
+  tradetracker.test.locale: nl_NL
+
+services:
+  # Inject config with Dependency injection to the Tradetracker Client
+  tradetracker:
+      class: Nav\TradeTrackerBundle\Client\TradeTrackerClient
+      arguments: ['%tradetracker.klantid%', '%tradetracker.sleutel%', '@service_container']

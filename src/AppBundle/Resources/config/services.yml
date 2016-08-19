@@ -1,17 +1,4 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
-    # SIB affiliate account
-    tradetracker.klantid: tradetracker-klantid
-    tradetracker.sleutel: tradetracker-sleutel
-    tradetracker.locale: nl_NL
-
-    # Naviation.me affiliate account
-    tradetracker.test.klantid: test-tradetracker-klantid
-    tradetracker.test.sleutel: test-tradetracker-sleutel
-    tradetracker.test.locale: nl_NL
-
 services:
-    tradetracker:
-        class: AppBundle\Client\TradeTrackerClient
-        arguments: ['%tradetracker.klantid%', '%tradetracker.sleutel%', '@service_container']
