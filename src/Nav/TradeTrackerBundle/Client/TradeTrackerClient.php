@@ -50,6 +50,8 @@ class TradeTrackerClient
         ContainerInterface $container
     ) {
         set_time_limit(0);
+        $this->container = $container;
+
         $this->client = new \SoapClient(
             'http://ws.tradetracker.com/soap/affiliate?wsdl', array(
                 'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP
@@ -62,7 +64,6 @@ class TradeTrackerClient
         }
 
         $this->client->authenticate($klantid, $sleutel, false, 'nl_NL', false);
-        $this->container = $container;
     }
 
 
@@ -89,12 +90,10 @@ class TradeTrackerClient
                 $newSite->setName($site->name);
                 $newSite->setUrl($site->URL);
                 $em->persist($newSite);
-                $em->flush();
                 $sites[] = $newSite;
             }
         }
-
-        return $sites;
+        $em->flush();
     }
 
     /**
@@ -127,8 +126,8 @@ class TradeTrackerClient
 
             $em->persist($newProduct);
         }
-        $em->flush();
 
+        $em->flush();
     }
 
     /**
@@ -160,7 +159,6 @@ class TradeTrackerClient
         }
 
         $em->flush();
-        die('Done imporing payments');
     }
 
     /**
@@ -214,13 +212,12 @@ class TradeTrackerClient
             $newCamp->setUrl($camp->URL);
             $newCamp->setInfo($camp->info);
             $newCamp->setName($camp->name);
-            $em->persist($newCamp);
-            $em->flush();
 
+            $em->persist($newCamp);
             $campaigns[] = $newCamp;
         }
 
-        return $campaigns;
+        $em->flush();
     }
 
 
@@ -271,6 +268,18 @@ class TradeTrackerClient
     public function getProductsFeeds($options = ['limit' => 10])
     {
         return $this->client->getFeedProducts($this->getSiteId(), $options);
+    }
+
+
+    /**
+     * Returns all campaign news from tradetracker.
+     *
+     * @param array $options
+     * @return mixed
+     */
+    public function getAllCampaignNews($options = [])
+    {
+        return $this->client->getCampaignNewsItems($options);
     }
 
 }

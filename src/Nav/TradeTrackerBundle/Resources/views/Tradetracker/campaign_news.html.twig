@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Quick jQuery Bootstrap Template</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <style>
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Blog TradeTracker CampaignNews through their API</h1>
+            <hr>
+        </div>
+    </div>
+
+    {% for new in news %}
+        <div class="row">
+            <h1>
+                {{ new.title }}
+            </h1>
+            <p>
+                {{ new.content|raw }}
+            </p>
+            <div>
+                <span class="badge">Posted {{ new.publishDate }}</span>
+                <div class="pull-right">
+                    <span class="label label-default">CampaignName: {{ new.campaign.name }}</span>
+                    <span class="label label-primary">CampaignURL: {{ new.campaign.URL }}</span>
+                    <span class="label label-success">Expiration: {{ new.expirationDate }}</span>
+                    <span class="label label-info">Published: {{ new.publishDate }}</span>
+                    <span class="label label-warning">campaignNewsType: {{  new.campaignNewsType }}</span>
+                    <span class="label label-danger">ID: {{ new.ID }}</span>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+<!-- Choose your version of jQuery -->
+<!-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script>
+</script>
+</body>
+</html>
