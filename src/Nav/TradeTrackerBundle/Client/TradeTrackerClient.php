@@ -15,9 +15,10 @@ use Nav\TradeTrackerBundle\Entity\Site;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+
 /**
  * Class TradeTrackerClient
- * @package AppBundle\Client
+ * @package Nav\TradeTrackerBundle\Client
  */
 class TradeTrackerClient
 {
@@ -72,7 +73,7 @@ class TradeTrackerClient
     {
         $sites = $this->client->getAffiliateSites();
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $siteRepo = $em->getRepository('AppBundle:Site');
+        $siteRepo = $em->getRepository('NavTradeTrackerBundle:Site');
         $sites[] = array();
 
         foreach ($sites as $site) {
@@ -104,7 +105,7 @@ class TradeTrackerClient
     {
         // set_time_limit(100);
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $productRepo = $em->getRepository('AppBundle:Product');
+        $productRepo = $em->getRepository('NavTradeTrackerBundle:Product');
         $productsFeed = $this->client->getFeedProducts($this->getSiteId(),
             $options);
         $products = [];
@@ -136,7 +137,7 @@ class TradeTrackerClient
     public function fetchPaymentsAndSave()
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $paymentsRepo = $em->getRepository('AppBundle:Payment');
+        $paymentsRepo = $em->getRepository('NavTradeTrackerBundle:Payment');
         $payments = $this->client->getPayments();
 
         foreach ($payments as $payment) {
@@ -196,11 +197,11 @@ class TradeTrackerClient
      * @param array $options
      * @return array
      */
-    public function fetchCampaignsAndSave($options = array())
+    public function fetchCampaignsAndSave($options = array('assignmentStatus' => 'accepted'))
     {
         $camps = $this->client->getCampaigns($this->getSiteId(), $options);
         $em = $this->container->get('doctrine')->getManager();
-        $campRepo = $em->getRepository('AppBundle:Campaign');
+        $campRepo = $em->getRepository('NavTradeTrackerBundle:Campaign');
         $campaigns = array();
 
         foreach ($camps as $camp) {
@@ -253,6 +254,14 @@ class TradeTrackerClient
     public function getTestingStuff()
     {
         return $this->client->__getFunctions();
+    }
+
+    public function getAuthenticated()
+    {
+        $klantId = $this->container->getParameter('tradetracker.klantid');
+        $sleutel = $this->container->getParameter('tradetracker.sleutel');
+
+        return $this->client->authenticate($klantId, $sleutel, false, 'nl_NL', false);
     }
 
     /**

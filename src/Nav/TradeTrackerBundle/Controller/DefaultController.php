@@ -13,8 +13,8 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $tradetracker = $this->get('tradetracker');
-        $siteId = $tradetracker->getSiteId();
-        dump($siteId);
+
+        dump($tradetracker->fetchCampaignsAndSave());
         return $this->render('NavTradeTrackerBundle:Default:index.html.twig');
     }
 }

@@ -1,8 +1,8 @@
 parameters:
   # See webservices in your Tradetracker account for your webservice credentials.
   # Nav Appaiya 19-08-2016, Rotterdam
-  tradetracker.klantid: tradetracker-klantid
-  tradetracker.sleutel: tradetracker-sleutel
+  tradetracker.klantid: '137292'
+  tradetracker.sleutel: '4b483e11c190f6ba7fd836b9869ab8acd648888d'
   tradetracker.locale: nl_NL
 
   # Naviation.me testing account
