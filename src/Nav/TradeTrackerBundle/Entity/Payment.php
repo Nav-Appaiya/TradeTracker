@@ -3,15 +3,14 @@
  * Created by PhpStorm.
  * User: nav.appaiya
  * Date: 19-8-2016
- * Time: 13:42
+ * Time: 13:42.
  */
-
 namespace Nav\TradeTrackerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Payment
+ * Payment.
  *
  * @ORM\Table(name="payment")
  * @ORM\Entity()
@@ -78,7 +77,7 @@ class Payment
 
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -88,7 +87,7 @@ class Payment
     }
 
     /**
-     * Set invoiceNumber
+     * Set invoiceNumber.
      *
      * @param string $invoiceNumber
      *
@@ -102,7 +101,7 @@ class Payment
     }
 
     /**
-     * Get invoiceNumber
+     * Get invoiceNumber.
      *
      * @return string
      */
@@ -112,7 +111,7 @@ class Payment
     }
 
     /**
-     * Set currency
+     * Set currency.
      *
      * @param string $currency
      *
@@ -126,7 +125,7 @@ class Payment
     }
 
     /**
-     * Get currency
+     * Get currency.
      *
      * @return string
      */
@@ -136,7 +135,7 @@ class Payment
     }
 
     /**
-     * Set subTotal
+     * Set subTotal.
      *
      * @param string $subTotal
      *
@@ -150,7 +149,7 @@ class Payment
     }
 
     /**
-     * Get subTotal
+     * Get subTotal.
      *
      * @return string
      */
@@ -160,7 +159,7 @@ class Payment
     }
 
     /**
-     * Set vAT
+     * Set vAT.
      *
      * @param string $vAT
      *
@@ -174,7 +173,7 @@ class Payment
     }
 
     /**
-     * Get vAT
+     * Get vAT.
      *
      * @return string
      */
@@ -184,7 +183,7 @@ class Payment
     }
 
     /**
-     * Set endTotal
+     * Set endTotal.
      *
      * @param string $endTotal
      *
@@ -198,7 +197,7 @@ class Payment
     }
 
     /**
-     * Get endTotal
+     * Get endTotal.
      *
      * @return string
      */
@@ -208,7 +207,7 @@ class Payment
     }
 
     /**
-     * Set billDate
+     * Set billDate.
      *
      * @param \DateTime $billDate
      *
@@ -222,7 +221,7 @@ class Payment
     }
 
     /**
-     * Get billDate
+     * Get billDate.
      *
      * @return \DateTime
      */
@@ -232,7 +231,7 @@ class Payment
     }
 
     /**
-     * Set payDate
+     * Set payDate.
      *
      * @param \DateTime $payDate
      *
@@ -246,7 +245,7 @@ class Payment
     }
 
     /**
-     * Get payDate
+     * Get payDate.
      *
      * @return \DateTime
      */

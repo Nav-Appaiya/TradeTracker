@@ -3,15 +3,14 @@
  * Created by PhpStorm.
  * User: nav.appaiya
  * Date: 19-8-2016
- * Time: 13:41
+ * Time: 13:41.
  */
-
 namespace Nav\TradeTrackerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Campaign
+ * Campaign.
  *
  * @ORM\Table(name="campaign")
  * @ORM\HasLifecycleCallbacks()
@@ -72,7 +71,7 @@ class Campaign
 
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -82,9 +81,9 @@ class Campaign
     }
 
     /**
-     * Set campaignId
+     * Set campaignId.
      *
-     * @param integer $campaignId
+     * @param int $campaignId
      *
      * @return Campaign
      */
@@ -96,7 +95,7 @@ class Campaign
     }
 
     /**
-     * Get campaignId
+     * Get campaignId.
      *
      * @return int
      */
@@ -106,7 +105,7 @@ class Campaign
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -120,7 +119,7 @@ class Campaign
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -130,7 +129,7 @@ class Campaign
     }
 
     /**
-     * Set url
+     * Set url.
      *
      * @param string $url
      *
@@ -144,7 +143,7 @@ class Campaign
     }
 
     /**
-     * Get url
+     * Get url.
      *
      * @return string
      */
@@ -154,7 +153,7 @@ class Campaign
     }
 
     /**
-     * Set info
+     * Set info.
      *
      * @param string $info
      *
@@ -168,7 +167,7 @@ class Campaign
     }
 
     /**
-     * Get info
+     * Get info.
      *
      * @return string
      */
@@ -178,10 +177,11 @@ class Campaign
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      * @ORM\PrePersist()
+     *
      * @return Campaign
      */
     public function setCreatedAt()
@@ -191,7 +191,7 @@ class Campaign
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -201,10 +201,11 @@ class Campaign
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      * @ORM\PreUpdate()
+     *
      * @return Campaign
      */
     public function setUpdatedAt()
@@ -213,7 +214,7 @@ class Campaign
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */

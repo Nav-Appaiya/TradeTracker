@@ -3,16 +3,14 @@
  * Created by PhpStorm.
  * User: nav.appaiya
  * Date: 19-8-2016
- * Time: 13:42
+ * Time: 13:42.
  */
-
 namespace Nav\TradeTrackerBundle\Entity;
-
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Site
+ * Site.
  *
  * @ORM\Table(name="site")
  * @ORM\Entity()
@@ -58,17 +56,16 @@ class Site
 
     /**
      * Site constructor.
+     *
      * @param int $siteId
      */
     public function __construct($siteId = false)
     {
-        $this->siteId = ($siteId ? $siteId : null) ;
-
+        $this->siteId = ($siteId ? $siteId : null);
     }
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -78,9 +75,9 @@ class Site
     }
 
     /**
-     * Set siteId
+     * Set siteId.
      *
-     * @param integer $siteId
+     * @param int $siteId
      *
      * @return Site
      */
@@ -92,7 +89,7 @@ class Site
     }
 
     /**
-     * Get siteId
+     * Get siteId.
      *
      * @return int
      */
@@ -102,7 +99,7 @@ class Site
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -116,7 +113,7 @@ class Site
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -126,7 +123,7 @@ class Site
     }
 
     /**
-     * Set url
+     * Set url.
      *
      * @param string $url
      *
@@ -140,7 +137,7 @@ class Site
     }
 
     /**
-     * Get url
+     * Get url.
      *
      * @return string
      */
@@ -150,7 +147,7 @@ class Site
     }
 
     /**
-     * Set info
+     * Set info.
      *
      * @param array $info
      *
@@ -164,7 +161,7 @@ class Site
     }
 
     /**
-     * Get info
+     * Get info.
      *
      * @return array
      */
