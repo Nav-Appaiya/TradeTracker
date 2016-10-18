@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Nav
  * Date: 30-05-16
- * Time: 21:07
+ * Time: 21:07.
  */
 namespace AppBundle\Controller;
 
@@ -11,8 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * Class CronController
- * @package AppBundle\Controller
+ * Class CronController.
  */
 class CronController extends Controller
 {
@@ -31,7 +30,7 @@ class CronController extends Controller
         print_r($client->getFunctions());
 
         $feedProducts = $client->getClient()->getFeedProducts($affilateSiteId, [
-            'limit' => 10
+            'limit' => 10,
         ]);
 
         print_r($client->fetchProductsAndSave());

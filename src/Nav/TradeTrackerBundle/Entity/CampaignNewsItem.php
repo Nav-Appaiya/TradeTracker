@@ -5,7 +5,7 @@ namespace Nav\TradeTrackerBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CampaignNewsItem
+ * CampaignNewsItem.
  *
  * @ORM\Table(name="campaign_news_item")
  * @ORM\Entity(repositoryClass="Nav\TradeTrackerBundle\Repository\CampaignNewsItemRepository")
@@ -56,9 +56,8 @@ class CampaignNewsItem
      */
     private $expirationDate;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -68,7 +67,7 @@ class CampaignNewsItem
     }
 
     /**
-     * Set campaign
+     * Set campaign.
      *
      * @param string $campaign
      *
@@ -82,7 +81,7 @@ class CampaignNewsItem
     }
 
     /**
-     * Get campaign
+     * Get campaign.
      *
      * @return string
      */
@@ -92,7 +91,7 @@ class CampaignNewsItem
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      *
@@ -106,7 +105,7 @@ class CampaignNewsItem
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -116,7 +115,7 @@ class CampaignNewsItem
     }
 
     /**
-     * Set content
+     * Set content.
      *
      * @param string $content
      *
@@ -130,7 +129,7 @@ class CampaignNewsItem
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return string
      */
@@ -140,7 +139,7 @@ class CampaignNewsItem
     }
 
     /**
-     * Set publishDate
+     * Set publishDate.
      *
      * @param \DateTime $publishDate
      *
@@ -154,7 +153,7 @@ class CampaignNewsItem
     }
 
     /**
-     * Get publishDate
+     * Get publishDate.
      *
      * @return \DateTime
      */
@@ -164,7 +163,7 @@ class CampaignNewsItem
     }
 
     /**
-     * Set expirationDate
+     * Set expirationDate.
      *
      * @param \DateTime $expirationDate
      *
@@ -178,7 +177,7 @@ class CampaignNewsItem
     }
 
     /**
-     * Get expirationDate
+     * Get expirationDate.
      *
      * @return \DateTime
      */
@@ -187,4 +186,3 @@ class CampaignNewsItem
         return $this->expirationDate;
     }
 }
-

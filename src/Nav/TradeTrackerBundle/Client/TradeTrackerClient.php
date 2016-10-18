@@ -3,9 +3,8 @@
  * Created by PhpStorm.
  * User: nav.appaiya
  * Date: 19-8-2016
- * Time: 13:40
+ * Time: 13:40.
  */
-
 namespace Nav\TradeTrackerBundle\Client;
 
 use Nav\TradeTrackerBundle\Entity\Campaign;
@@ -15,10 +14,8 @@ use Nav\TradeTrackerBundle\Entity\Site;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-
 /**
- * Class TradeTrackerClient
- * @package Nav\TradeTrackerBundle\Client
+ * Class TradeTrackerClient.
  */
 class TradeTrackerClient
 {
@@ -32,40 +29,41 @@ class TradeTrackerClient
     private $container;
 
     /**
-     * Hardcoded siteid for now
+     * Hardcoded siteid for now.
      */
     public $affilateSiteId;
 
 
     /**
      * TradeTrackerClient constructor.
-     * @param string $klantid
-     * @param string $sleutel
+     *
+     * @param string             $klantid
+     * @param string             $sleutel
      * @param ContainerInterface $container
+     *
      * @internal param $client
      */
     public function __construct(
-        $klantid = '',
-        $sleutel = '',
+        $klantid,
+        $sleutel,
         ContainerInterface $container
     ) {
         set_time_limit(0);
         $this->container = $container;
 
         $this->client = new \SoapClient(
-            'http://ws.tradetracker.com/soap/affiliate?wsdl', array(
-                'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP
-            )
+            'http://ws.tradetracker.com/soap/affiliate?wsdl', [
+                'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP,
+            ]
         );
 
         if ($klantid == 'tradetracker-klantid' || $sleutel == 'tradetracker-sleutel') {
-            return new Exception("KlantID / Sleutel not set properly, please " .
-                "check services.yml under Bundle/Resources/config/.");
+            return new Exception('KlantID / Sleutel not set properly, please '.
+                'check services.yml under Bundle/Resources/config/.');
         }
 
         $this->client->authenticate($klantid, $sleutel, false, 'nl_NL', false);
     }
-
 
     /**
      * Fetches all sites and saves them to the sites table.
@@ -75,7 +73,7 @@ class TradeTrackerClient
         $sites = $this->client->getAffiliateSites();
         $em = $this->container->get('doctrine.orm.entity_manager');
         $siteRepo = $em->getRepository('NavTradeTrackerBundle:Site');
-        $sites[] = array();
+        $sites[] = [];
 
         foreach ($sites as $site) {
             if (isset($site->ID)) {
@@ -84,7 +82,7 @@ class TradeTrackerClient
                 if (!$newSite) {
                     $newSite = new Site($site->ID);
                     $em->persist($newSite);
-                    echo 'new site adding: ' . $site->name . "\n";
+                    echo 'new site adding: '.$site->name."\n";
                 }
                 $newSite->setInfo($site->info);
                 $newSite->setName($site->name);
@@ -98,6 +96,7 @@ class TradeTrackerClient
 
     /**
      * Fetchs products and fills database, will update products if already found.
+     *
      * @param array $options
      */
     public function fetchProductsAndSave($options = ['limit' => 100000])
@@ -117,7 +116,7 @@ class TradeTrackerClient
                 echo $newProduct->getName();
             }
             $newProduct->setName($item->name);
-            $newProduct->setProductCategoryName(isset($item->productCategoryName) ? $item->productCategoryName : "None");
+            $newProduct->setProductCategoryName(isset($item->productCategoryName) ? $item->productCategoryName : 'None');
             $newProduct->setDescription(isset($item->description) ?: 'No description');
             $newProduct->setImageUrl($item->imageURL);
             $newProduct->setProductUrl($item->productURL);
@@ -144,7 +143,7 @@ class TradeTrackerClient
 
             if (!$paymentEntity) {
                 /**
-                 * @var Payment $paymentEntity
+                 * @var Payment
                  */
                 $paymentEntity = new Payment();
                 $paymentEntity->setInvoiceNumber($payment->invoiceNumber);
@@ -190,24 +189,25 @@ class TradeTrackerClient
 
     /**
      * Returns array with campaigns
-     * Passing options by using filter
+     * Passing options by using filter.
      *
      * @param array $options
+     *
      * @return array
      */
-    public function fetchCampaignsAndSave($options = array('assignmentStatus' => 'accepted'))
+    public function fetchCampaignsAndSave($options = ['assignmentStatus' => 'accepted'])
     {
         $camps = $this->client->getCampaigns($this->getSiteId(), $options);
         $em = $this->container->get('doctrine')->getManager();
         $campRepo = $em->getRepository('NavTradeTrackerBundle:Campaign');
-        $campaigns = array();
+        $campaigns = [];
 
         foreach ($camps as $camp) {
             $newCamp = $campRepo->findOneByCampaignId($camp->ID);
             if (!$newCamp) {
                 $newCamp = new Campaign();
                 $newCamp->setCampaignId($camp->ID);
-                echo 'new capaign adding: ' . $camp->name . "\n";
+                echo 'new capaign adding: '.$camp->name."\n";
             }
             $newCamp->setUrl($camp->URL);
             $newCamp->setInfo($camp->info);
@@ -219,7 +219,6 @@ class TradeTrackerClient
 
         $em->flush();
     }
-
 
     /**
      * @return mixed
@@ -263,6 +262,7 @@ class TradeTrackerClient
 
     /**
      * @param array $options
+     *
      * @return mixed
      */
     public function getProductsFeeds($options = ['limit' => 10])
@@ -270,16 +270,15 @@ class TradeTrackerClient
         return $this->client->getFeedProducts($this->getSiteId(), $options);
     }
 
-
     /**
      * Returns all campaign news from tradetracker.
      *
      * @param array $options
+     *
      * @return mixed
      */
     public function getAllCampaignNews($options = [])
     {
         return $this->client->getCampaignNewsItems($options);
     }
-
 }

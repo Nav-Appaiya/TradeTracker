@@ -8,16 +8,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CampaignNewsController extends Controller
 {
-
     /**
      * @Route(path="/blog")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
     {
         $options = null;
 
-        if($request->get('id')){
+        if ($request->get('id')) {
             $options['campaignCategoryID'] = $request->get('id');
         }
 
@@ -25,7 +25,7 @@ class CampaignNewsController extends Controller
         $news = $this->get('tradetracker')->getAllCampaignNews($options);
 
         return $this->render('@NavTradeTracker/Tradetracker/campaign_news.html.twig', [
-            'news' => $news
+            'news' => $news,
         ]);
     }
 }

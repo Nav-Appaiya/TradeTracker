@@ -3,15 +3,14 @@
  * Created by PhpStorm.
  * User: nav.appaiya
  * Date: 19-8-2016
- * Time: 13:42
+ * Time: 13:42.
  */
-
 namespace Nav\TradeTrackerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Product
+ * Product.
  *
  * @ORM\Table(name="product")
  * @ORM\Entity()
@@ -85,7 +84,7 @@ class Product
 
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -95,7 +94,7 @@ class Product
     }
 
     /**
-     * Set identifier
+     * Set identifier.
      *
      * @param string $identifier
      *
@@ -109,7 +108,7 @@ class Product
     }
 
     /**
-     * Get identifier
+     * Get identifier.
      *
      * @return string
      */
@@ -119,7 +118,7 @@ class Product
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -133,7 +132,7 @@ class Product
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -143,7 +142,7 @@ class Product
     }
 
     /**
-     * Set productCategoryName
+     * Set productCategoryName.
      *
      * @param string $productCategoryName
      *
@@ -157,7 +156,7 @@ class Product
     }
 
     /**
-     * Get productCategoryName
+     * Get productCategoryName.
      *
      * @return string
      */
@@ -167,7 +166,7 @@ class Product
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      *
@@ -181,7 +180,7 @@ class Product
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -191,7 +190,7 @@ class Product
     }
 
     /**
-     * Set price
+     * Set price.
      *
      * @param string $price
      *
@@ -205,7 +204,7 @@ class Product
     }
 
     /**
-     * Get price
+     * Get price.
      *
      * @return string
      */
@@ -215,7 +214,7 @@ class Product
     }
 
     /**
-     * Set productUrl
+     * Set productUrl.
      *
      * @param string $productUrl
      *
@@ -229,7 +228,7 @@ class Product
     }
 
     /**
-     * Get productUrl
+     * Get productUrl.
      *
      * @return string
      */
@@ -239,7 +238,7 @@ class Product
     }
 
     /**
-     * Set imageUrl
+     * Set imageUrl.
      *
      * @param string $imageUrl
      *
@@ -253,7 +252,7 @@ class Product
     }
 
     /**
-     * Get imageUrl
+     * Get imageUrl.
      *
      * @return string
      */
@@ -263,7 +262,7 @@ class Product
     }
 
     /**
-     * Set additional
+     * Set additional.
      *
      * @param array $additional
      *
@@ -277,7 +276,7 @@ class Product
     }
 
     /**
-     * Get additional
+     * Get additional.
      *
      * @return array
      */
